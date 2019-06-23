@@ -1,9 +1,22 @@
 {
   "name": "gatsby-typescript-material-rebass-starter",
   "private": true,
-  "description": "A starter to bootstrap quickly a gatsby typescript project with usual librairies and configurations",
+  "description": "A starter to bootstrap quickly a gatsby typescript project with usual libraries and configurations",
   "version": "1.0.0",
   "author": "Abdullah Hilson <abdullah.hilson@gmail.com>",
+  "scripts": {
+    "build": "gatsby build",
+    "clean": "rm -rf .cache public node_modules/.cache",
+    "codegen": "graphql-codegen --config codegen.yml",
+    "codegen:watch": "graphql-codegen --watch --config codegen.yml",
+    "develop": "gatsby develop",
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+    "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
+    "lint:fix": "yarn lint --fix",
+    "serve": "gatsby serve",
+    "start": "npm run develop",
+    "test": "jest"
+  },
   "dependencies": {
     "@babel/core": "^7.4.5",
     "@babel/runtime": "^7.4.5",
@@ -74,19 +87,6 @@
     "eslint"
   ],
   "license": "Unlicense",
-  "scripts": {
-    "build": "gatsby build",
-    "clean": "rm -rf .cache public node_modules/.cache",
-    "codegen": "graphql-codegen --config codegen.yml",
-    "codegen:watch": "graphql-codegen --watch --config codegen.yml",
-    "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
-    "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
-    "lint:fix": "yarn lint --fix",
-    "serve": "gatsby serve",
-    "start": "npm run develop",
-    "test": "jest"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/abumalick/gatsby-typescript-material-rebass-starter"
