@@ -28,7 +28,6 @@ module.exports = {
     '@typescript-eslint/indent': 0,
     '@typescript-eslint/interface-name-prefix': [1, 'always'],
     '@typescript-eslint/member-delimiter-style': 0,
-    '@typescript-eslint/no-non-null-assertion': 0, // necessary with codegen
     '@typescript-eslint/no-unused-vars': 1,
     '@typescript-eslint/no-var-requires': 0,
   },
