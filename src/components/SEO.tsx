@@ -1,6 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import {useStaticQuery, graphql} from 'gatsby'
+import {SeoQuery} from '../types/gatsbyGraphql'
 
 interface IProps {
   description?: string
@@ -19,16 +20,6 @@ interface IProps {
   title?: string
 }
 
-interface ISEOQuery {
-  site: {
-    siteMetadata: {
-      siteTitle: string
-      siteDescription: string
-      author: string
-    }
-  }
-}
-
 const SEO = ({
   description,
   keywords = [],
@@ -36,9 +27,9 @@ const SEO = ({
   meta = [],
   title,
 }: IProps): JSX.Element => {
-  const {site}: ISEOQuery = useStaticQuery(
+  const {site}: SeoQuery = useStaticQuery(
     graphql`
-      query {
+      query SEO {
         site {
           siteMetadata {
             siteTitle
@@ -49,14 +40,14 @@ const SEO = ({
       }
     `,
   )
-  const {author, siteDescription, siteTitle} = site.siteMetadata
-  const metaDescription = description || siteDescription
+  const {author, siteDescription, siteTitle} = site!.siteMetadata!
+  const metaDescription = description || siteDescription!
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title ? `${title} | ${siteTitle}` : siteTitle}
+      title={title ? `${title} | ${siteTitle}` : siteTitle!}
       meta={[
         {
           name: 'description',
@@ -80,7 +71,7 @@ const SEO = ({
         },
         {
           name: 'twitter:creator',
-          content: author,
+          content: author!,
         },
         {
           name: 'twitter:title',

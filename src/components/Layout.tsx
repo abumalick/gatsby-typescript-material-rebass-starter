@@ -2,24 +2,15 @@ import 'normalize.css'
 import React from 'react'
 import {graphql, useStaticQuery} from 'gatsby'
 import Header from './header'
+import {LayoutQuery} from '../types/gatsbyGraphql'
 
 interface IProps {
   children: React.ReactNode
 }
 
-interface ILayoutQuery {
-  site: {
-    siteMetadata: {
-      companyName: string
-      canonicalUrl: string
-      siteTitle: string
-    }
-  }
-}
-
 const Layout = ({children}: IProps): JSX.Element => {
-  const {site}: ILayoutQuery = useStaticQuery(graphql`
-    query LayoutQuery {
+  const layoutQuery: LayoutQuery = useStaticQuery(graphql`
+    query Layout {
       site {
         siteMetadata {
           canonicalUrl
@@ -29,14 +20,18 @@ const Layout = ({children}: IProps): JSX.Element => {
       }
     }
   `)
-  const {canonicalUrl, companyName, siteTitle} = site.siteMetadata
+  const {
+    canonicalUrl,
+    companyName,
+    siteTitle,
+  } = layoutQuery!.site!.siteMetadata!
   return (
     <>
-      <Header siteTitle={siteTitle} />
+      <Header siteTitle={siteTitle!} />
       <main>{children}</main>
       <footer>
         © {new Date().getFullYear()} Copyright{' '}
-        <a href={canonicalUrl}>{companyName}</a> - All rights reserved
+        <a href={canonicalUrl!}>{companyName}</a> - All rights reserved
       </footer>
     </>
   )
