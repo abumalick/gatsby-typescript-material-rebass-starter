@@ -24,7 +24,7 @@ const Layout = ({children}: IProps): JSX.Element => {
     canonicalUrl,
     companyName,
     siteTitle,
-  } = layoutQuery!.site!.siteMetadata!
+  } = layoutQuery.site!.siteMetadata!
   return (
     <>
       <Header siteTitle={siteTitle!} />
