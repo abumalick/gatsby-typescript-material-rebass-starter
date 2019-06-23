@@ -56,3 +56,11 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 [Read the documentation about deployment](https://www.gatsbyjs.org/docs/deploying-and-hosting/)
 
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+## FAQ
+
+### vscode adds automatically `import console = require('console')`
+
+- CTRL click on `require('console')`
+- comment the typescript declaration
+- save
