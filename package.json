@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.4.5",
-    "@babel/runtime": "^7.4.5",
+    "@babel/runtime": "^7.5.1",
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
     "@material/react-button": "^0.14.0",
