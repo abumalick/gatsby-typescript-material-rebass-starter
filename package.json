@@ -18,7 +18,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.5.0",
     "@babel/runtime": "^7.4.5",
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
