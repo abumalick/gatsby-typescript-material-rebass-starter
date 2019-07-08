@@ -1415,19 +1415,19 @@
     "@material/react-ripple" "^0.14.0"
     classnames "^2.2.6"
 
-"@material/react-card@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@material/react-card/-/react-card-0.14.0.tgz#38a4acd0182bcc385bf8c2eacbf21645a2ce9f36"
-  integrity sha512-HP3EuBxiu4F0T/A3LkUuau5+SwoUjwD5OFWMWySmwHwVdDQXkE1Zihrw0Z0n6FxuBAj1a+7zPrB9HHrypd7oMw==
+"@material/react-card@^0.14.1":
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/@material/react-card/-/react-card-0.14.1.tgz#0ac3acc5ab6cc80a08e08211e218d0a06a7a7970"
+  integrity sha512-w2iOu/1pnfkTWeFyX0AbPqBzf/EIGkx/oZWM0l3KBtREgxPjb8BWrOevUdrNjQjmDIicpm5l9FV+50BZL4qKyw==
   dependencies:
     "@material/card" "^2.1.1"
-    "@material/react-ripple" "^0.14.0"
+    "@material/react-ripple" "^0.14.1"
     classnames "^2.2.6"
 
-"@material/react-ripple@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@material/react-ripple/-/react-ripple-0.14.0.tgz#99decf9a5a004ec7cbb0d524c072eb293d577acf"
-  integrity sha512-gkOwRP+W/Hg/pH1sDCYLLauq9xi57aV5za9IK2NwjbgP4FLTfyczFO3yXSKaKOIjuexQG1hVePaJVxe++RrUGA==
+"@material/react-ripple@^0.14.0", "@material/react-ripple@^0.14.1":
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/@material/react-ripple/-/react-ripple-0.14.1.tgz#a5edeed1efd3207e78fb4eb8c62a9bc65124fb01"
+  integrity sha512-UWrE6u7WiGihIB1eQfXr7pt2ZNLhphN4AQayz2x1ZTvKuQ4etGOyRkFeZcaBuv0Qb5f8UE76YsO+4yVUQsKGqQ==
   dependencies:
     "@material/dom" "^1.0.0"
     "@material/ripple" "^1.0.0"
