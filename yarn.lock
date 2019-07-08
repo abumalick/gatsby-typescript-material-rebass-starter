@@ -1406,13 +1406,13 @@
   resolved "https://registry.yarnpkg.com/@material/feature-targeting/-/feature-targeting-0.44.1.tgz#afafc80294e5efab94bee31a187273d43d34979a"
   integrity sha512-90cc7njn4aHbH9UxY8qgZth1W5JgOgcEdWdubH1t7sFkwqFxS5g3zgxSBt46TygFBVIXNZNq35Xmg80wgqO7Pg==
 
-"@material/react-button@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@material/react-button/-/react-button-0.14.0.tgz#f5c1f4014709c9ef2453625dda61a2956ad214b8"
-  integrity sha512-ZHTgRGlBy2dfcqLsTOlXTj5YmfYQ2jNJe4RCxJdXOscwuGKyVPmxXGNq9BEJfGL29viN4u4Dx3h2GhcHg1ptPw==
+"@material/react-button@^0.14.1":
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/@material/react-button/-/react-button-0.14.1.tgz#b12581feff906b9f94eda2a8160cc6a04a303a7c"
+  integrity sha512-ZgBXykYhi71/s4qUP3PA3nj+TMLXJH2eGvmeIU2grNwxuYJSmg0uu9q/ZNG88nF7UBLOMBfvBxYJ8eUeMBUm3A==
   dependencies:
     "@material/button" "^1.1.0"
-    "@material/react-ripple" "^0.14.0"
+    "@material/react-ripple" "^0.14.1"
     classnames "^2.2.6"
 
 "@material/react-card@^0.14.0":
@@ -1424,10 +1424,10 @@
     "@material/react-ripple" "^0.14.0"
     classnames "^2.2.6"
 
-"@material/react-ripple@^0.14.0":
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/@material/react-ripple/-/react-ripple-0.14.0.tgz#99decf9a5a004ec7cbb0d524c072eb293d577acf"
-  integrity sha512-gkOwRP+W/Hg/pH1sDCYLLauq9xi57aV5za9IK2NwjbgP4FLTfyczFO3yXSKaKOIjuexQG1hVePaJVxe++RrUGA==
+"@material/react-ripple@^0.14.0", "@material/react-ripple@^0.14.1":
+  version "0.14.1"
+  resolved "https://registry.yarnpkg.com/@material/react-ripple/-/react-ripple-0.14.1.tgz#a5edeed1efd3207e78fb4eb8c62a9bc65124fb01"
+  integrity sha512-UWrE6u7WiGihIB1eQfXr7pt2ZNLhphN4AQayz2x1ZTvKuQ4etGOyRkFeZcaBuv0Qb5f8UE76YsO+4yVUQsKGqQ==
   dependencies:
     "@material/dom" "^1.0.0"
     "@material/ripple" "^1.0.0"
