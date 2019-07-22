@@ -334,17 +334,15 @@ export type TDirectorySortInput = {
 }
 
 export type TDuotoneGradient = {
-  readonly highlight: Maybe<Scalars['String']>
-  readonly shadow: Maybe<Scalars['String']>
+  readonly highlight: Scalars['String']
+  readonly shadow: Scalars['String']
   readonly opacity: Maybe<Scalars['Int']>
 }
 
 export type TFile = TNode & {
   __typename?: 'File'
-  readonly id: Scalars['ID']
-  readonly parent: Maybe<TNode>
-  readonly children: ReadonlyArray<TNode>
-  readonly internal: TInternal
+  readonly birthtime: Maybe<Scalars['Date']>
+  readonly birthtimeMs: Maybe<Scalars['Float']>
   readonly sourceInstanceName: Maybe<Scalars['String']>
   readonly absolutePath: Maybe<Scalars['String']>
   readonly relativePath: Maybe<Scalars['String']>
@@ -373,13 +371,15 @@ export type TFile = TNode & {
   readonly atimeMs: Maybe<Scalars['Float']>
   readonly mtimeMs: Maybe<Scalars['Float']>
   readonly ctimeMs: Maybe<Scalars['Float']>
-  readonly birthtimeMs: Maybe<Scalars['Float']>
   readonly atime: Maybe<Scalars['Date']>
   readonly mtime: Maybe<Scalars['Date']>
   readonly ctime: Maybe<Scalars['Date']>
-  readonly birthtime: Maybe<Scalars['Date']>
   /** Copy file to static directory and return public url to it */
   readonly publicURL: Maybe<Scalars['String']>
+  readonly id: Scalars['ID']
+  readonly parent: Maybe<TNode>
+  readonly children: ReadonlyArray<TNode>
+  readonly internal: TInternal
   readonly childImageSharp: Maybe<TImageSharp>
 }
 
@@ -432,13 +432,6 @@ export type TFileCtimeArgs = {
   locale: Maybe<Scalars['String']>
 }
 
-export type TFileBirthtimeArgs = {
-  formatString: Maybe<Scalars['String']>
-  fromNow: Maybe<Scalars['Boolean']>
-  difference: Maybe<Scalars['String']>
-  locale: Maybe<Scalars['String']>
-}
-
 export type TFileConnection = {
   __typename?: 'FileConnection'
   readonly totalCount: Scalars['Int']
@@ -467,6 +460,40 @@ export type TFileEdge = {
 }
 
 export enum TFileFieldsEnum {
+  Birthtime = 'birthtime',
+  BirthtimeMs = 'birthtimeMs',
+  SourceInstanceName = 'sourceInstanceName',
+  AbsolutePath = 'absolutePath',
+  RelativePath = 'relativePath',
+  Extension = 'extension',
+  Size = 'size',
+  PrettySize = 'prettySize',
+  ModifiedTime = 'modifiedTime',
+  AccessTime = 'accessTime',
+  ChangeTime = 'changeTime',
+  BirthTime = 'birthTime',
+  Root = 'root',
+  Dir = 'dir',
+  Base = 'base',
+  Ext = 'ext',
+  Name = 'name',
+  RelativeDirectory = 'relativeDirectory',
+  Dev = 'dev',
+  Mode = 'mode',
+  Nlink = 'nlink',
+  Uid = 'uid',
+  Gid = 'gid',
+  Rdev = 'rdev',
+  Blksize = 'blksize',
+  Ino = 'ino',
+  Blocks = 'blocks',
+  AtimeMs = 'atimeMs',
+  MtimeMs = 'mtimeMs',
+  CtimeMs = 'ctimeMs',
+  Atime = 'atime',
+  Mtime = 'mtime',
+  Ctime = 'ctime',
+  PublicUrl = 'publicURL',
   Id = 'id',
   ParentId = 'parent___id',
   ParentParentId = 'parent___parent___id',
@@ -553,47 +580,102 @@ export enum TFileFieldsEnum {
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
   InternalType = 'internal___type',
-  SourceInstanceName = 'sourceInstanceName',
-  AbsolutePath = 'absolutePath',
-  RelativePath = 'relativePath',
-  Extension = 'extension',
-  Size = 'size',
-  PrettySize = 'prettySize',
-  ModifiedTime = 'modifiedTime',
-  AccessTime = 'accessTime',
-  ChangeTime = 'changeTime',
-  BirthTime = 'birthTime',
-  Root = 'root',
-  Dir = 'dir',
-  Base = 'base',
-  Ext = 'ext',
-  Name = 'name',
-  RelativeDirectory = 'relativeDirectory',
-  Dev = 'dev',
-  Mode = 'mode',
-  Nlink = 'nlink',
-  Uid = 'uid',
-  Gid = 'gid',
-  Rdev = 'rdev',
-  Blksize = 'blksize',
-  Ino = 'ino',
-  Blocks = 'blocks',
-  AtimeMs = 'atimeMs',
-  MtimeMs = 'mtimeMs',
-  CtimeMs = 'ctimeMs',
-  BirthtimeMs = 'birthtimeMs',
-  Atime = 'atime',
-  Mtime = 'mtime',
-  Ctime = 'ctime',
-  Birthtime = 'birthtime',
-  PublicUrl = 'publicURL',
+  ChildImageSharpId = 'childImageSharp___id',
+  ChildImageSharpFixedBase64 = 'childImageSharp___fixed___base64',
+  ChildImageSharpFixedTracedSvg = 'childImageSharp___fixed___tracedSVG',
+  ChildImageSharpFixedAspectRatio = 'childImageSharp___fixed___aspectRatio',
+  ChildImageSharpFixedWidth = 'childImageSharp___fixed___width',
+  ChildImageSharpFixedHeight = 'childImageSharp___fixed___height',
+  ChildImageSharpFixedSrc = 'childImageSharp___fixed___src',
+  ChildImageSharpFixedSrcSet = 'childImageSharp___fixed___srcSet',
+  ChildImageSharpFixedSrcWebp = 'childImageSharp___fixed___srcWebp',
+  ChildImageSharpFixedSrcSetWebp = 'childImageSharp___fixed___srcSetWebp',
+  ChildImageSharpFixedOriginalName = 'childImageSharp___fixed___originalName',
+  ChildImageSharpResolutionsBase64 = 'childImageSharp___resolutions___base64',
+  ChildImageSharpResolutionsTracedSvg = 'childImageSharp___resolutions___tracedSVG',
+  ChildImageSharpResolutionsAspectRatio = 'childImageSharp___resolutions___aspectRatio',
+  ChildImageSharpResolutionsWidth = 'childImageSharp___resolutions___width',
+  ChildImageSharpResolutionsHeight = 'childImageSharp___resolutions___height',
+  ChildImageSharpResolutionsSrc = 'childImageSharp___resolutions___src',
+  ChildImageSharpResolutionsSrcSet = 'childImageSharp___resolutions___srcSet',
+  ChildImageSharpResolutionsSrcWebp = 'childImageSharp___resolutions___srcWebp',
+  ChildImageSharpResolutionsSrcSetWebp = 'childImageSharp___resolutions___srcSetWebp',
+  ChildImageSharpResolutionsOriginalName = 'childImageSharp___resolutions___originalName',
+  ChildImageSharpFluidBase64 = 'childImageSharp___fluid___base64',
+  ChildImageSharpFluidTracedSvg = 'childImageSharp___fluid___tracedSVG',
+  ChildImageSharpFluidAspectRatio = 'childImageSharp___fluid___aspectRatio',
+  ChildImageSharpFluidSrc = 'childImageSharp___fluid___src',
+  ChildImageSharpFluidSrcSet = 'childImageSharp___fluid___srcSet',
+  ChildImageSharpFluidSrcWebp = 'childImageSharp___fluid___srcWebp',
+  ChildImageSharpFluidSrcSetWebp = 'childImageSharp___fluid___srcSetWebp',
+  ChildImageSharpFluidSizes = 'childImageSharp___fluid___sizes',
+  ChildImageSharpFluidOriginalImg = 'childImageSharp___fluid___originalImg',
+  ChildImageSharpFluidOriginalName = 'childImageSharp___fluid___originalName',
+  ChildImageSharpFluidPresentationWidth = 'childImageSharp___fluid___presentationWidth',
+  ChildImageSharpFluidPresentationHeight = 'childImageSharp___fluid___presentationHeight',
+  ChildImageSharpSizesBase64 = 'childImageSharp___sizes___base64',
+  ChildImageSharpSizesTracedSvg = 'childImageSharp___sizes___tracedSVG',
+  ChildImageSharpSizesAspectRatio = 'childImageSharp___sizes___aspectRatio',
+  ChildImageSharpSizesSrc = 'childImageSharp___sizes___src',
+  ChildImageSharpSizesSrcSet = 'childImageSharp___sizes___srcSet',
+  ChildImageSharpSizesSrcWebp = 'childImageSharp___sizes___srcWebp',
+  ChildImageSharpSizesSrcSetWebp = 'childImageSharp___sizes___srcSetWebp',
+  ChildImageSharpSizesSizes = 'childImageSharp___sizes___sizes',
+  ChildImageSharpSizesOriginalImg = 'childImageSharp___sizes___originalImg',
+  ChildImageSharpSizesOriginalName = 'childImageSharp___sizes___originalName',
+  ChildImageSharpSizesPresentationWidth = 'childImageSharp___sizes___presentationWidth',
+  ChildImageSharpSizesPresentationHeight = 'childImageSharp___sizes___presentationHeight',
+  ChildImageSharpOriginalWidth = 'childImageSharp___original___width',
+  ChildImageSharpOriginalHeight = 'childImageSharp___original___height',
+  ChildImageSharpOriginalSrc = 'childImageSharp___original___src',
+  ChildImageSharpResizeSrc = 'childImageSharp___resize___src',
+  ChildImageSharpResizeTracedSvg = 'childImageSharp___resize___tracedSVG',
+  ChildImageSharpResizeWidth = 'childImageSharp___resize___width',
+  ChildImageSharpResizeHeight = 'childImageSharp___resize___height',
+  ChildImageSharpResizeAspectRatio = 'childImageSharp___resize___aspectRatio',
+  ChildImageSharpResizeOriginalName = 'childImageSharp___resize___originalName',
+  ChildImageSharpParentId = 'childImageSharp___parent___id',
+  ChildImageSharpParentParentId = 'childImageSharp___parent___parent___id',
+  ChildImageSharpParentParentChildren = 'childImageSharp___parent___parent___children',
+  ChildImageSharpParentChildren = 'childImageSharp___parent___children',
+  ChildImageSharpParentChildrenId = 'childImageSharp___parent___children___id',
+  ChildImageSharpParentChildrenChildren = 'childImageSharp___parent___children___children',
+  ChildImageSharpParentInternalContent = 'childImageSharp___parent___internal___content',
+  ChildImageSharpParentInternalContentDigest = 'childImageSharp___parent___internal___contentDigest',
+  ChildImageSharpParentInternalDescription = 'childImageSharp___parent___internal___description',
+  ChildImageSharpParentInternalFieldOwners = 'childImageSharp___parent___internal___fieldOwners',
+  ChildImageSharpParentInternalIgnoreType = 'childImageSharp___parent___internal___ignoreType',
+  ChildImageSharpParentInternalMediaType = 'childImageSharp___parent___internal___mediaType',
+  ChildImageSharpParentInternalOwner = 'childImageSharp___parent___internal___owner',
+  ChildImageSharpParentInternalType = 'childImageSharp___parent___internal___type',
+  ChildImageSharpChildren = 'childImageSharp___children',
+  ChildImageSharpChildrenId = 'childImageSharp___children___id',
+  ChildImageSharpChildrenParentId = 'childImageSharp___children___parent___id',
+  ChildImageSharpChildrenParentChildren = 'childImageSharp___children___parent___children',
+  ChildImageSharpChildrenChildren = 'childImageSharp___children___children',
+  ChildImageSharpChildrenChildrenId = 'childImageSharp___children___children___id',
+  ChildImageSharpChildrenChildrenChildren = 'childImageSharp___children___children___children',
+  ChildImageSharpChildrenInternalContent = 'childImageSharp___children___internal___content',
+  ChildImageSharpChildrenInternalContentDigest = 'childImageSharp___children___internal___contentDigest',
+  ChildImageSharpChildrenInternalDescription = 'childImageSharp___children___internal___description',
+  ChildImageSharpChildrenInternalFieldOwners = 'childImageSharp___children___internal___fieldOwners',
+  ChildImageSharpChildrenInternalIgnoreType = 'childImageSharp___children___internal___ignoreType',
+  ChildImageSharpChildrenInternalMediaType = 'childImageSharp___children___internal___mediaType',
+  ChildImageSharpChildrenInternalOwner = 'childImageSharp___children___internal___owner',
+  ChildImageSharpChildrenInternalType = 'childImageSharp___children___internal___type',
+  ChildImageSharpInternalContent = 'childImageSharp___internal___content',
+  ChildImageSharpInternalContentDigest = 'childImageSharp___internal___contentDigest',
+  ChildImageSharpInternalDescription = 'childImageSharp___internal___description',
+  ChildImageSharpInternalFieldOwners = 'childImageSharp___internal___fieldOwners',
+  ChildImageSharpInternalIgnoreType = 'childImageSharp___internal___ignoreType',
+  ChildImageSharpInternalMediaType = 'childImageSharp___internal___mediaType',
+  ChildImageSharpInternalOwner = 'childImageSharp___internal___owner',
+  ChildImageSharpInternalType = 'childImageSharp___internal___type',
 }
 
 export type TFileFilterInput = {
-  readonly id: Maybe<TStringQueryOperatorInput>
-  readonly parent: Maybe<TNodeFilterInput>
-  readonly children: Maybe<TNodeFilterListInput>
-  readonly internal: Maybe<TInternalFilterInput>
+  readonly birthtime: Maybe<TDateQueryOperatorInput>
+  readonly birthtimeMs: Maybe<TFloatQueryOperatorInput>
   readonly sourceInstanceName: Maybe<TStringQueryOperatorInput>
   readonly absolutePath: Maybe<TStringQueryOperatorInput>
   readonly relativePath: Maybe<TStringQueryOperatorInput>
@@ -622,12 +704,15 @@ export type TFileFilterInput = {
   readonly atimeMs: Maybe<TFloatQueryOperatorInput>
   readonly mtimeMs: Maybe<TFloatQueryOperatorInput>
   readonly ctimeMs: Maybe<TFloatQueryOperatorInput>
-  readonly birthtimeMs: Maybe<TFloatQueryOperatorInput>
   readonly atime: Maybe<TDateQueryOperatorInput>
   readonly mtime: Maybe<TDateQueryOperatorInput>
   readonly ctime: Maybe<TDateQueryOperatorInput>
-  readonly birthtime: Maybe<TDateQueryOperatorInput>
   readonly publicURL: Maybe<TStringQueryOperatorInput>
+  readonly id: Maybe<TStringQueryOperatorInput>
+  readonly parent: Maybe<TNodeFilterInput>
+  readonly children: Maybe<TNodeFilterListInput>
+  readonly internal: Maybe<TInternalFilterInput>
+  readonly childImageSharp: Maybe<TImageSharpFilterInput>
 }
 
 export type TFileGroupConnection = {
@@ -686,15 +771,15 @@ export enum TImageFormat {
 export type TImageSharp = TNode & {
   __typename?: 'ImageSharp'
   readonly id: Scalars['ID']
-  readonly parent: Maybe<TNode>
-  readonly children: ReadonlyArray<TNode>
-  readonly internal: TInternal
   readonly fixed: Maybe<TImageSharpFixed>
   readonly resolutions: Maybe<TImageSharpResolutions>
   readonly fluid: Maybe<TImageSharpFluid>
   readonly sizes: Maybe<TImageSharpSizes>
   readonly original: Maybe<TImageSharpOriginal>
   readonly resize: Maybe<TImageSharpResize>
+  readonly parent: Maybe<TNode>
+  readonly children: ReadonlyArray<TNode>
+  readonly internal: TInternal
 }
 
 export type TImageSharpFixedArgs = {
@@ -825,6 +910,59 @@ export type TImageSharpEdge = {
 
 export enum TImageSharpFieldsEnum {
   Id = 'id',
+  FixedBase64 = 'fixed___base64',
+  FixedTracedSvg = 'fixed___tracedSVG',
+  FixedAspectRatio = 'fixed___aspectRatio',
+  FixedWidth = 'fixed___width',
+  FixedHeight = 'fixed___height',
+  FixedSrc = 'fixed___src',
+  FixedSrcSet = 'fixed___srcSet',
+  FixedSrcWebp = 'fixed___srcWebp',
+  FixedSrcSetWebp = 'fixed___srcSetWebp',
+  FixedOriginalName = 'fixed___originalName',
+  ResolutionsBase64 = 'resolutions___base64',
+  ResolutionsTracedSvg = 'resolutions___tracedSVG',
+  ResolutionsAspectRatio = 'resolutions___aspectRatio',
+  ResolutionsWidth = 'resolutions___width',
+  ResolutionsHeight = 'resolutions___height',
+  ResolutionsSrc = 'resolutions___src',
+  ResolutionsSrcSet = 'resolutions___srcSet',
+  ResolutionsSrcWebp = 'resolutions___srcWebp',
+  ResolutionsSrcSetWebp = 'resolutions___srcSetWebp',
+  ResolutionsOriginalName = 'resolutions___originalName',
+  FluidBase64 = 'fluid___base64',
+  FluidTracedSvg = 'fluid___tracedSVG',
+  FluidAspectRatio = 'fluid___aspectRatio',
+  FluidSrc = 'fluid___src',
+  FluidSrcSet = 'fluid___srcSet',
+  FluidSrcWebp = 'fluid___srcWebp',
+  FluidSrcSetWebp = 'fluid___srcSetWebp',
+  FluidSizes = 'fluid___sizes',
+  FluidOriginalImg = 'fluid___originalImg',
+  FluidOriginalName = 'fluid___originalName',
+  FluidPresentationWidth = 'fluid___presentationWidth',
+  FluidPresentationHeight = 'fluid___presentationHeight',
+  SizesBase64 = 'sizes___base64',
+  SizesTracedSvg = 'sizes___tracedSVG',
+  SizesAspectRatio = 'sizes___aspectRatio',
+  SizesSrc = 'sizes___src',
+  SizesSrcSet = 'sizes___srcSet',
+  SizesSrcWebp = 'sizes___srcWebp',
+  SizesSrcSetWebp = 'sizes___srcSetWebp',
+  SizesSizes = 'sizes___sizes',
+  SizesOriginalImg = 'sizes___originalImg',
+  SizesOriginalName = 'sizes___originalName',
+  SizesPresentationWidth = 'sizes___presentationWidth',
+  SizesPresentationHeight = 'sizes___presentationHeight',
+  OriginalWidth = 'original___width',
+  OriginalHeight = 'original___height',
+  OriginalSrc = 'original___src',
+  ResizeSrc = 'resize___src',
+  ResizeTracedSvg = 'resize___tracedSVG',
+  ResizeWidth = 'resize___width',
+  ResizeHeight = 'resize___height',
+  ResizeAspectRatio = 'resize___aspectRatio',
+  ResizeOriginalName = 'resize___originalName',
   ParentId = 'parent___id',
   ParentParentId = 'parent___parent___id',
   ParentParentParentId = 'parent___parent___parent___id',
@@ -910,72 +1048,19 @@ export enum TImageSharpFieldsEnum {
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
   InternalType = 'internal___type',
-  FixedBase64 = 'fixed___base64',
-  FixedTracedSvg = 'fixed___tracedSVG',
-  FixedAspectRatio = 'fixed___aspectRatio',
-  FixedWidth = 'fixed___width',
-  FixedHeight = 'fixed___height',
-  FixedSrc = 'fixed___src',
-  FixedSrcSet = 'fixed___srcSet',
-  FixedSrcWebp = 'fixed___srcWebp',
-  FixedSrcSetWebp = 'fixed___srcSetWebp',
-  FixedOriginalName = 'fixed___originalName',
-  ResolutionsBase64 = 'resolutions___base64',
-  ResolutionsTracedSvg = 'resolutions___tracedSVG',
-  ResolutionsAspectRatio = 'resolutions___aspectRatio',
-  ResolutionsWidth = 'resolutions___width',
-  ResolutionsHeight = 'resolutions___height',
-  ResolutionsSrc = 'resolutions___src',
-  ResolutionsSrcSet = 'resolutions___srcSet',
-  ResolutionsSrcWebp = 'resolutions___srcWebp',
-  ResolutionsSrcSetWebp = 'resolutions___srcSetWebp',
-  ResolutionsOriginalName = 'resolutions___originalName',
-  FluidBase64 = 'fluid___base64',
-  FluidTracedSvg = 'fluid___tracedSVG',
-  FluidAspectRatio = 'fluid___aspectRatio',
-  FluidSrc = 'fluid___src',
-  FluidSrcSet = 'fluid___srcSet',
-  FluidSrcWebp = 'fluid___srcWebp',
-  FluidSrcSetWebp = 'fluid___srcSetWebp',
-  FluidSizes = 'fluid___sizes',
-  FluidOriginalImg = 'fluid___originalImg',
-  FluidOriginalName = 'fluid___originalName',
-  FluidPresentationWidth = 'fluid___presentationWidth',
-  FluidPresentationHeight = 'fluid___presentationHeight',
-  SizesBase64 = 'sizes___base64',
-  SizesTracedSvg = 'sizes___tracedSVG',
-  SizesAspectRatio = 'sizes___aspectRatio',
-  SizesSrc = 'sizes___src',
-  SizesSrcSet = 'sizes___srcSet',
-  SizesSrcWebp = 'sizes___srcWebp',
-  SizesSrcSetWebp = 'sizes___srcSetWebp',
-  SizesSizes = 'sizes___sizes',
-  SizesOriginalImg = 'sizes___originalImg',
-  SizesOriginalName = 'sizes___originalName',
-  SizesPresentationWidth = 'sizes___presentationWidth',
-  SizesPresentationHeight = 'sizes___presentationHeight',
-  OriginalWidth = 'original___width',
-  OriginalHeight = 'original___height',
-  OriginalSrc = 'original___src',
-  ResizeSrc = 'resize___src',
-  ResizeTracedSvg = 'resize___tracedSVG',
-  ResizeWidth = 'resize___width',
-  ResizeHeight = 'resize___height',
-  ResizeAspectRatio = 'resize___aspectRatio',
-  ResizeOriginalName = 'resize___originalName',
 }
 
 export type TImageSharpFilterInput = {
   readonly id: Maybe<TStringQueryOperatorInput>
-  readonly parent: Maybe<TNodeFilterInput>
-  readonly children: Maybe<TNodeFilterListInput>
-  readonly internal: Maybe<TInternalFilterInput>
   readonly fixed: Maybe<TImageSharpFixedFilterInput>
   readonly resolutions: Maybe<TImageSharpResolutionsFilterInput>
   readonly fluid: Maybe<TImageSharpFluidFilterInput>
   readonly sizes: Maybe<TImageSharpSizesFilterInput>
   readonly original: Maybe<TImageSharpOriginalFilterInput>
   readonly resize: Maybe<TImageSharpResizeFilterInput>
+  readonly parent: Maybe<TNodeFilterInput>
+  readonly children: Maybe<TNodeFilterListInput>
+  readonly internal: Maybe<TInternalFilterInput>
 }
 
 export type TImageSharpFixed = {
@@ -1227,6 +1312,8 @@ export enum TPotraceTurnPolicy {
 
 export type TQuery = {
   __typename?: 'Query'
+  readonly imageSharp: Maybe<TImageSharp>
+  readonly allImageSharp: Maybe<TImageSharpConnection>
   readonly file: Maybe<TFile>
   readonly allFile: Maybe<TFileConnection>
   readonly sitePage: Maybe<TSitePage>
@@ -1237,15 +1324,31 @@ export type TQuery = {
   readonly allSite: Maybe<TSiteConnection>
   readonly directory: Maybe<TDirectory>
   readonly allDirectory: Maybe<TDirectoryConnection>
-  readonly imageSharp: Maybe<TImageSharp>
-  readonly allImageSharp: Maybe<TImageSharpConnection>
 }
 
-export type TQueryFileArgs = {
+export type TQueryImageSharpArgs = {
   id: Maybe<TStringQueryOperatorInput>
+  fixed: Maybe<TImageSharpFixedFilterInput>
+  resolutions: Maybe<TImageSharpResolutionsFilterInput>
+  fluid: Maybe<TImageSharpFluidFilterInput>
+  sizes: Maybe<TImageSharpSizesFilterInput>
+  original: Maybe<TImageSharpOriginalFilterInput>
+  resize: Maybe<TImageSharpResizeFilterInput>
   parent: Maybe<TNodeFilterInput>
   children: Maybe<TNodeFilterListInput>
   internal: Maybe<TInternalFilterInput>
+}
+
+export type TQueryAllImageSharpArgs = {
+  filter: Maybe<TImageSharpFilterInput>
+  sort: Maybe<TImageSharpSortInput>
+  skip: Maybe<Scalars['Int']>
+  limit: Maybe<Scalars['Int']>
+}
+
+export type TQueryFileArgs = {
+  birthtime: Maybe<TDateQueryOperatorInput>
+  birthtimeMs: Maybe<TFloatQueryOperatorInput>
   sourceInstanceName: Maybe<TStringQueryOperatorInput>
   absolutePath: Maybe<TStringQueryOperatorInput>
   relativePath: Maybe<TStringQueryOperatorInput>
@@ -1274,12 +1377,15 @@ export type TQueryFileArgs = {
   atimeMs: Maybe<TFloatQueryOperatorInput>
   mtimeMs: Maybe<TFloatQueryOperatorInput>
   ctimeMs: Maybe<TFloatQueryOperatorInput>
-  birthtimeMs: Maybe<TFloatQueryOperatorInput>
   atime: Maybe<TDateQueryOperatorInput>
   mtime: Maybe<TDateQueryOperatorInput>
   ctime: Maybe<TDateQueryOperatorInput>
-  birthtime: Maybe<TDateQueryOperatorInput>
   publicURL: Maybe<TStringQueryOperatorInput>
+  id: Maybe<TStringQueryOperatorInput>
+  parent: Maybe<TNodeFilterInput>
+  children: Maybe<TNodeFilterListInput>
+  internal: Maybe<TInternalFilterInput>
+  childImageSharp: Maybe<TImageSharpFilterInput>
 }
 
 export type TQueryAllFileArgs = {
@@ -1396,26 +1502,6 @@ export type TQueryDirectoryArgs = {
 export type TQueryAllDirectoryArgs = {
   filter: Maybe<TDirectoryFilterInput>
   sort: Maybe<TDirectorySortInput>
-  skip: Maybe<Scalars['Int']>
-  limit: Maybe<Scalars['Int']>
-}
-
-export type TQueryImageSharpArgs = {
-  id: Maybe<TStringQueryOperatorInput>
-  parent: Maybe<TNodeFilterInput>
-  children: Maybe<TNodeFilterListInput>
-  internal: Maybe<TInternalFilterInput>
-  fixed: Maybe<TImageSharpFixedFilterInput>
-  resolutions: Maybe<TImageSharpResolutionsFilterInput>
-  fluid: Maybe<TImageSharpFluidFilterInput>
-  sizes: Maybe<TImageSharpSizesFilterInput>
-  original: Maybe<TImageSharpOriginalFilterInput>
-  resize: Maybe<TImageSharpResizeFilterInput>
-}
-
-export type TQueryAllImageSharpArgs = {
-  filter: Maybe<TImageSharpFilterInput>
-  sort: Maybe<TImageSharpSortInput>
   skip: Maybe<Scalars['Int']>
   limit: Maybe<Scalars['Int']>
 }
