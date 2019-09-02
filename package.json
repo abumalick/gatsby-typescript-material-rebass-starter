@@ -24,7 +24,7 @@
     "@emotion/styled": "^10.0.15",
     "@material/react-button": "^0.15.0",
     "@material/react-card": "^0.15.0",
-    "@rebass/emotion": "^3.1.1",
+    "@rebass/emotion": "^3.2.0",
     "core-js": "^2.6.9",
     "emotion-theming": "^10.0.14",
     "gatsby": "^2.15.2",
