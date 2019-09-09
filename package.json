@@ -36,7 +36,7 @@
     "gatsby-plugin-sass": "^2.1.13",
     "gatsby-plugin-sharp": "^2.2.20",
     "gatsby-plugin-typescript": "^2.1.2",
-    "gatsby-source-filesystem": "^2.1.19",
+    "gatsby-source-filesystem": "^2.1.21",
     "gatsby-transformer-sharp": "^2.2.13",
     "gatsby-transformer-yaml": "^2.2.8",
     "node-sass": "^4.12.0",
